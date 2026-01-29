@@ -9,6 +9,7 @@ RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/ngin
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 443
+EXPOSE 8081
 
 STOPSIGNAL SIGQUIT
 

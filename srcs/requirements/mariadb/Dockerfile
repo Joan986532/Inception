@@ -1,11 +1,12 @@
 FROM debian:bookworm
 
-RUN apt update && apt upgrade -y && apt-get install -y mariadb-server mariadb-client
+RUN apt update && apt upgrade -y && apt-get install -y mariadb-server mariadb-client gettext-base
 
 RUN mkdir -p /etc/myslq/mariadb.conf.d
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d
 
 RUN mkdir ./entrypoint-initdb.d
+COPY ./tools/init.sql.template /entrypoint-initdb.d
 
 RUN mkdir -p /run/mysqld
 RUN chown -R mysql:mysql /run/mysqld

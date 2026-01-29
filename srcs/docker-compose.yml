@@ -4,8 +4,8 @@ services:
     container_name: mariadb
     env_file: .env
     networks:
-      - inception
-    build: requirements/mariadb
+      - inception_net
+    build: ./requirements/mariadb
     volumes:
       - mariadb:/var/lib/mysql
     expose:
@@ -24,10 +24,10 @@ services:
     volumes:
       - wordpress:/var/www/html
     networks:
-      - inception
+      - inception_net
     depends_on:
       - wordpress
-    build: requirements/nginx
+    build: ./requirements/nginx
     ports:
       - "443:443"
     restart: on-failure
@@ -38,14 +38,53 @@ services:
     volumes:
       - wordpress:/var/www/html
     networks:
-      - inception
-    build: requirements/wordpress
+      - inception_net
+    build: ./requirements/wordpress
     depends_on:
       mariadb:
         condition: service_healthy
+      redis:
+        condition: service_started  
     restart: on-failure
     expose:
      - "9000"
+
+  redis:
+    container_name: redis
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception_net
+    build: ./requirements/bonus/redis
+    ports:
+      - "6379:6379"
+    restart: on-failure
+
+  ftp:
+    container_name: ftp
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception_net
+    depends_on:
+      - wordpress
+    build: ./requirements/bonus/ftp
+    ports:
+      - "20-21:20-21/tcp"
+      - "21000-21010:21000-21010/tcp"
+    restart: on-failure
+    
+  portfolio:
+    container_name: portfolio
+    env_file: .env
+    networks:
+      - inception_net
+    build: ./requirements/bonus/portfolio
+    expose:
+    - "8081"
+    restart: on-failure
 
 volumes:
   wordpress:
@@ -62,4 +101,5 @@ volumes:
       device: '/home/jnauroy/data/mariadb'
 
 networks:
-  inception:
+  inception_net:
+    driver: bridge

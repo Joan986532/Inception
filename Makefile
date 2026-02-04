@@ -4,6 +4,7 @@ up :
 	@mkdir -p /home/jnauroy/data
 	@mkdir -p /home/jnauroy/data/mariadb
 	@mkdir -p /home/jnauroy/data/wordpress
+	@mkdir -p /home/jnauroy/data/portainer
 	@docker compose -f ./srcs/docker-compose.yml up -d
 
 down :

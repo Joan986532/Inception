@@ -1,12 +1,8 @@
 FROM debian:bookworm
+RUN apt update -y && apt upgrade -y && apt install -y vsftpd openssl openssh-server
 
-RUN apt update -y && apt upgrade -y && apt install vsftpd -y
+COPY ./tools/script.sh /
 
-RUN mkdir -p /var/run/vsftpd/empty
+RUN chmod +x ./script.sh
 
-COPY ./conf/vsftpd.conf /etc/vstpdf/vsftpd.conf
-COPY ./tools/script.sh .
-RUN chmod +x script.sh
-
-ENTRYPOINT ["/script.sh"]
-CMD ["vsftpd"]
+CMD ["./script.sh"]

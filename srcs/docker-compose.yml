@@ -86,6 +86,35 @@ services:
     - "8081"
     restart: on-failure
 
+  adminer:
+    container_name: adminer
+    env_file: .env
+    networks:
+      - inception_net
+    depends_on:
+      - mariadb
+    build: ./requirements/bonus/adminer
+    expose:
+      - "8080"
+    restart: on-failure
+
+  portainer:
+    container_name: portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer:/data
+    env_file: .env
+    networks:
+      - inception_net
+    depends_on:
+      - mariadb
+    build: ./requirements/bonus/portainer
+    ports:
+      - "9001:9000"
+      - "9443:9443"
+      - "8000:8000"
+    restart: on-failure
+
 volumes:
   wordpress:
     driver: local
@@ -99,6 +128,13 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/jnauroy/data/mariadb'
+
+  portainer:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/jnauroy/data/portainer'
 
 networks:
   inception_net:

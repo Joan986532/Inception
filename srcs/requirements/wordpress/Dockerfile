@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM public.ecr.aws/debian/debian:bookworm
 
 RUN apt update && apt upgrade && apt install -y curl wget php8.2 php-fpm php-mysql
 

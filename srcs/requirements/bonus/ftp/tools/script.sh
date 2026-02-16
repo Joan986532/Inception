@@ -1,41 +1,37 @@
-#!/bin/sh
+#!/bin/bash
 
-service vsftpd start
+set -e
+set -x
 
-adduser $FTP_USER --disabled-password
+if ! id -u $FTP_USER > /dev/null 2>&1; then
+	adduser --system $FTP_USER
+	usermod -a -G ftp $FTP_USER
+fi
 
-echo "$FTP_USER:$FTP_PWD" | /usr/sbin/chpasswd
+	chown -R $FTP_USER:ftp /var/www/html
+	chmod 755 /var/www/html
+	echo "$FTP_USER:$FTP_PASS" | chpasswd
+	
+	mkdir -p /etc/vsftpd/empty
+	mkdir -p /var/run/vsftpd
+	
+if [ ! -f /etc/vsftpd/vsftpd.userlist ]; then
+	touch /etc/vsftpd/vsftpd.userlist
+	echo "$FTP_USER" >> /etc/vsftpd/vstfpd.userlist
+fi
 
-echo "$FTP_USER" | tee -a /etc/vsftpd.userlist 
+if [ ! -f /etc/vsftpd/empty/chroot/list ]; then
+	touch /etc/vsftpd/empty/chroot.list
+	echo "$FTP_USER" >> /etc/vsftpd/chroot.list
+fi
 
-mkdir /home/$FTP_USER/ftp
+if ! grep -q "local_root=/var/www/html" /etc/vsftpd.conf; then	
+	echo "
+	userlist_deny=NO
+	local_root=/var/www/html
+	secure_chroot_dir=/var/run/vsftpd/empty
+	userlist_enable=YES
+	userlist_file=/etc/vsftpd/vsftpd.userlist" >> /etc/vsftpd.conf
+fi
 
-chown nobody:nogroup /home/$FTP_USER/ftp
-chmod a-w /home/$FTP_USER/ftp
-
-mkdir /home/$FTP_USER/ftp/files
-chown $FTP_USER:$FTP_USER /home/$FTP_USER/ftp/files
-
-sed -i -r "s/#write_enable=YES/write_enable=YES/1"   /etc/vsftpd.conf
-sed -i -r "s/#chroot_local_user=YES/chroot_local_user=YES/1"   /etc/vsftpd.conf
-
-echo "
-local_root=/var/www/html
-listen=YES
-listen_ipv6=NO
-anonymous_enable=NO
-local_enable=YES
-write_enable=YES
-xferlog_enable=YES
-connect_from_port_20=YES
-pasv_enable=YES
-pasv_min_port=21100
-pasv_max_port=21100
-secure_chroot_dir=/var/run/vsftpd/empty
-chroot_local_user=YES
-allow_writeable_chroot=YES
-userlist_file=/etc/vsftpd.userlist" >> /etc/vsftpd.conf
-
-service vsftpd stop
-
-/usr/sbin/vsftpd
+exec /usr/sbin/vsftpd /etc/vsftpd.conf

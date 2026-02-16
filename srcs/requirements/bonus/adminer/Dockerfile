@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM public.ecr.aws/debian/debian:bookworm
 
 RUN apt update -y && apt upgrade -y && apt install -y php php-fpm php-mysqli php-pgsql php-sqlite3 wget nginx && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /var/www/html /run/php && chown -R www-data:www-data /run/php /var/www/html

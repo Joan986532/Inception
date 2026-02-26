@@ -2,7 +2,7 @@ FROM public.ecr.aws/debian/debian:bookworm
 RUN apt update -y && apt upgrade -y && apt install -y vsftpd
 
 COPY tools/script.sh /
-COPY conf/vstfpd.conf /etc/vstfpd.conf
+COPY conf/vsftpd.conf /etc/vsftpd.conf
 
 RUN chmod +x ./script.sh
 

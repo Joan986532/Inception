@@ -1,6 +1,6 @@
 FROM public.ecr.aws/debian/debian:bookworm
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt upgrade -y && apt install -y \
     ca-certificates \
     curl \
     gnupg \
@@ -16,7 +16,7 @@ RUN curl -L https://github.com/portainer/portainer/releases/download/2.33.5/port
     chmod +x /opt/portainer/portainer && \
     rm -rf /tmp/portainer.tar.gz
 
-EXPOSE 9000 9443 8000
+EXPOSE 9000 9443
 
 VOLUME /data
 

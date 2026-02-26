@@ -11,6 +11,7 @@ services:
     expose:
       - "3306"
     restart: on-failure
+    init: true
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${SQL_ROOT_PASSWORD}"]
       interval: 5s
@@ -31,6 +32,7 @@ services:
     ports:
       - "443:443"
     restart: on-failure
+    init: true
 
   wordpress:
     container_name: wordpress
@@ -46,6 +48,7 @@ services:
       redis:
         condition: service_started  
     restart: on-failure
+    init: true
     expose:
      - "9000"
 
@@ -60,6 +63,7 @@ services:
     ports:
       - "6379:6379"
     restart: on-failure
+    init: true
 
   ftp:
     container_name: ftp
@@ -75,6 +79,7 @@ services:
       - "21:21"
       - "21100-21110:21100-21110"
     restart: on-failure
+    init: true
     
   portfolio:
     container_name: portfolio
@@ -85,6 +90,7 @@ services:
     expose:
     - "8081"
     restart: on-failure
+    init: true
 
   adminer:
     container_name: adminer
@@ -97,6 +103,7 @@ services:
     expose:
       - "8080"
     restart: on-failure
+    init: true
 
   portainer:
     container_name: portainer
@@ -114,6 +121,7 @@ services:
       - "9443:9443"
       - "8000:8000"
     restart: on-failure
+    init: true
 
 volumes:
   wordpress:

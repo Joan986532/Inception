@@ -1,6 +1,6 @@
 FROM public.ecr.aws/debian/debian:bookworm
 
-RUN apt update && apt upgrade && apt install -y curl wget php8.2 php-fpm php-mysql
+RUN apt update && apt upgrade -y && apt install curl wget php8.2 php-fpm php-mysql -y
 
 RUN mkdir -p /run/php && chown www-data:www-data /run/php
 

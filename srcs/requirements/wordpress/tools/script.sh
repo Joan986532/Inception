@@ -25,6 +25,11 @@ if [ ! -f "wp-config.php" ]; then
 	wp plugin install redis-cache --activate --allow-root
 	wp redis enable --allow-root
 	wp config set WP_CACHE true --raw --allow-root
+	
+	# FTP
+	wp config set FTP_HOST ftp --allow-root
+	wp config set FTP_USER $FTP_USER --allow-root
+	wp config set FTP_PASS $FTP_PASS --allow-root
 fi
 
 exec "$@"

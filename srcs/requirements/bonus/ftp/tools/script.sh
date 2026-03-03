@@ -17,7 +17,7 @@ fi
 	
 if [ ! -f /etc/vsftpd/vsftpd.userlist ]; then
 	touch /etc/vsftpd/vsftpd.userlist
-	echo "$FTP_USER" >> /etc/vsftpd/vstfpd.userlist
+	echo "$FTP_USER" >> /etc/vsftpd/vsftpd.userlist
 fi
 
 if [ ! -f /etc/vsftpd/empty/chroot/list ]; then
@@ -34,4 +34,4 @@ if ! grep -q "local_root=/var/www/html" /etc/vsftpd.conf; then
 	userlist_file=/etc/vsftpd/vsftpd.userlist" >> /etc/vsftpd.conf
 fi
 
-exec /usr/sbin/vsftpd /etc/vsftpd.conf
+exec "$@"

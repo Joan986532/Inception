@@ -27,13 +27,13 @@ sudo usermod -aG docker <username>
 
 ## How to build and launch the project using the Makefile and Docker Compose ?
 
-To build the containers and volumes, run: ``make`>
+To build the containers and volumes, run: `make`.
 
-To stop the docker running : ``make down```<
+To stop the docker running : `make stop`.
 
-To stop the docker running and destroy the volumes: ```make clean``>
+To stop the docker running and destroy the volumes: `make clean`.
 
-To stop and delete all the images and destroy the volumes: ```make fclean`>
+To stop and delete all the images and destroy the volumes: `make fclean`.
 
 These commands use the docker compose's comands. Therefore, one can directly use these commands. To go in a particular docker:
 ```
@@ -85,8 +85,3 @@ docker volume ls
 ## Where the project data is stored and how it persists ?
 
 All volumes will be stored: `/home/login/data`. It's persistent because when we restart, volumes aren't deleted.
-
-
-
-
-

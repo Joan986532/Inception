@@ -1,7 +1,7 @@
 # User documentation
 
 Welcome here, in the User Documentation.
-The goal of this documentation will be answer the following questions :
+The objective of this documentation is to answer the following questions :
 
 - What services are provided by the stack ?
 - How can we start/stop the project ?
@@ -41,7 +41,7 @@ requirements/nginx/
 
 The second service is Wordpress. It’s a CMS, a Content Management System. It allows you to create and manage a dynamic website. WordPress processes all the dynamic requests transmitted by NGINX. It is written in PHP. It communicates only with Nginx on the port **9000** and with Mariadb on the **3306**.
 
-It has a persistent volume at `>/var/www/html`. This volume has been mapped to `>/home/login/data/wordpress`.
+It has a persistent volume in `/var/www/html`. This volume has been mapped to `/home/login/data/wordpress`.
 
 The service is presented as follows in the repo:
 ```
@@ -167,13 +167,13 @@ requirements/bonus/portainer/
 
 ## How can we start/stop the project ?
 
-To build the dockers, the volumes and run: ``make`>
+To build the dockers, the volumes and run: `make`.
 
-To stop the docker running : ``make stop```<
+To stop the docker running : `make stop`.
 
-To stop the docker running and destroy the volumes: ```make clean``>
+To stop the docker running and destroy the volumes: `make clean`.
 
-To stop and delete all the images and destroy the volumes: ```make fclean`>
+To stop and delete all the images and destroy the volumes: `make fclean`.
 
 These commands use the docker compose commands.
 

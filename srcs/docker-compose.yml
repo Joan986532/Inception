@@ -49,8 +49,6 @@ services:
         condition: service_started  
     restart: on-failure
     init: true
-    expose:
-     - "9000"
 
   redis:
     container_name: redis

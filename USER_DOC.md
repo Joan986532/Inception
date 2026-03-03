@@ -229,8 +229,9 @@ The static HTML page should be displayed.
 
 If these pages are accessible, it confirms that NGINX, WordPress, and container networking are working properly.
 
-### 3. Verify database connectivity (Adminer)
+### 3. Verify database connectivity
 
+#### With Adminer
 Connection settings:
 
 System: **MySQL**
@@ -244,6 +245,15 @@ Password: **SQL_PASSWORD**
 Database: **wordpress**
 
 If Adminer connects successfully and displays database tables, MariaDB is functioning correctly.
+
+#### with the terminal:
+```
+docker exec -it mariadb mariadb -u <user> -p<password>
+> USE wordpress;
+> SHOW TABLES;
+> SELECT * FROM wp_users;
+```
+If everything is set, you should see content about users.
 
 ### 4. Verify Redis cache
 

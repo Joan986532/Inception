@@ -8,11 +8,12 @@ if ! id -u $FTP_USER > /dev/null 2>&1; then
 	# adduser --system $FTP_USER
 	usermod -a -G ftp $FTP_USER
 fi
-
-	chown -R $FTP_USER:ftp /var/www/html
-	chmod 755 /var/www/html
+	chown 755 /var/www/html
+	usermod -d /var/www/html $FTP_USER
+	# chown -R $FTP_USER:ftp /var/www/html
+	# chown -R www-data:www-data /var/www/html
 	echo "$FTP_USER:$FTP_PASS" | chpasswd
-	
+
 	mkdir -p /etc/vsftpd/empty
 	mkdir -p /var/run/vsftpd
 	

@@ -30,6 +30,12 @@ if [ ! -f "wp-config.php" ]; then
 	wp config set FTP_HOST ftp --allow-root
 	wp config set FTP_USER $FTP_USER --allow-root
 	wp config set FTP_PASS $FTP_PASS --allow-root
+	wp config set FTP_BASE /var/www/html/ --allow-root
+	wp config set FS_METHOD direct --allow-root
 fi
+
+mkdir -p /var/www/html/wp-content/upgrade
+chown -R www-data:www-data /var/www/html/wp-content
+chmod -R 775 /var/www/html/wp-content
 
 exec "$@"

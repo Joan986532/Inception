@@ -4,7 +4,8 @@ set -e
 set -x
 
 if ! id -u $FTP_USER > /dev/null 2>&1; then
-	adduser --system $FTP_USER
+	adduser --disabled-password --gecos "" $FTP_USER
+	# adduser --system $FTP_USER
 	usermod -a -G ftp $FTP_USER
 fi
 

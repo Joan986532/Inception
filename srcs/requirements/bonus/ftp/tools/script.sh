@@ -25,13 +25,13 @@ if [ ! -f /etc/vsftpd/empty/chroot/list ]; then
 	echo "$FTP_USER" >> /etc/vsftpd/chroot.list
 fi
 
-if ! grep -q "local_root=/var/www/html" /etc/vsftpd.conf; then	
-	echo "
-	userlist_deny=NO
-	local_root=/var/www/html
-	secure_chroot_dir=/var/run/vsftpd/empty
-	userlist_enable=YES
-	userlist_file=/etc/vsftpd/vsftpd.userlist" >> /etc/vsftpd.conf
-fi
+# if ! grep -q "local_root=/var/www/html" /etc/vsftpd.conf; then	
+#	echo "
+#	userlist_deny=NO
+#	local_root=/var/www/html
+#	secure_chroot_dir=/var/run/vsftpd/empty
+#	userlist_enable=YES
+#	userlist_file=/etc/vsftpd/vsftpd.userlist" >> /etc/vsftpd.conf
+# fi
 
 exec "$@"

@@ -230,7 +230,7 @@ The static HTML page should be displayed.
 If these pages are accessible, it confirms that NGINX, WordPress, and container networking are working properly.
 
 ### 3. Verify database connectivity
-
+    
 #### With Adminer
 Connection settings:
 
@@ -257,7 +257,7 @@ If everything is set, you should see content about users.
 
 ### 4. Verify Redis cache
 
-Redis logs can checked :
+Redis logs can be checked :
 
 ```
 docker compose logs redis

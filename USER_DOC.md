@@ -179,20 +179,18 @@ These commands use the docker compose commands.
 
 ## How can we access to the website and the administration panel ?
 
-(* = https)
 
-[To access WordPress (*443)](https://localhost)
+[To access WordPress](https://localhost)
 
-[To access Portainer (9443)](http://localhost:9443)
+[To access Portainer](https://localhost:9443)
 
-[To access site static (8081)](http://localhost/portfolio)
+[To access portfolio static stite](https://localhost/portfolio)
 
-[To access Adminer (8080)](http://localhost/adminer)
+[To access Adminer](https://localhost/adminer)
 
 ## Where can we found all manage credentials ?
 
 We can found every credentials in the hidden files .env. For some safety reason, he isn't in the repo. 
-
 
 ## How can i verify if the services is running correctly ?
 

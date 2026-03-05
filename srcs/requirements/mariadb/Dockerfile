@@ -1,4 +1,4 @@
-FROM public.ecr.aws/debian/debian:bookworm
+FROM debian:bookworm
 
 RUN apt update && apt upgrade -y && apt-get install -y mariadb-server mariadb-client gettext-base
 

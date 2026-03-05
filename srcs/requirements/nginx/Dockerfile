@@ -1,4 +1,4 @@
-FROM public.ecr.aws/debian/debian:bookworm
+FROM debian:bookworm
 
 RUN apt update && apt -y upgrade && apt install nginx openssl -y
 

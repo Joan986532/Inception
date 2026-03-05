@@ -1,4 +1,4 @@
-FROM public.ecr.aws/debian/debian:bookworm
+FROM debian:bookworm
 
 RUN apt update -y && apt upgrade -y && apt install -y redis-server
 

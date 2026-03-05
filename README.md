@@ -6,7 +6,7 @@ This project has been created as part of the 42 curriculum by jnauroy
 Inception is a system administration project using containers. The objective is to run a web server,
 where each service is host in his own container and communicate with each others.
 
-Wikipedia: Each container is basically a fully functional and portable cloud or non-cloud computing environment surrounding
+Each container is basically a fully functional and portable cloud or non-cloud computing environment surrounding
 the application and keeping it independent of other environments running in parallel Individually, each container
 simulates a different software application and runs isolated processes by bundling related configuration files,
 libraries and dependencies. But, collectively, multiple containers share a common operating system kernel.
